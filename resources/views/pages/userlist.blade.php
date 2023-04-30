@@ -1,13 +1,17 @@
 @extends('layouts.master')
 
 @section('title')
-    DivarHome
+    DivaList
 @endsection
 
 @section('content')
     <br>
     <br>
-    <br>
+    @if(Session::has('message'))
+    <div style="direction:rtl" >
+    {{Session::get('message')}}
+    <div>
+        @endif
     <br>
     <br>
     <table border="6" bgcolor="#b22222" class="table table-striped ">
@@ -16,6 +20,8 @@
             <th scope="col">user_id</th>
             <th scope="col">role_id</th>
             <th scope="col">UserName</th>
+            <th scope="col">Delete</th>
+
         </tr>
         </thead>
         <tbody>
@@ -29,6 +35,12 @@
                     <td>{{$user->UserID}}</td>
                     <td>{{$user->Role_ID}}</td>
                     <td>{{$user->UserName}}</td>
+                    <td>
+                    <form action="/admin/users/delete/{{$user->UserID}}" method="POST">
+                        @csrf
+                        @method('delete')
+                    <button style="btn btn-danger btn-sm">Delete</button>
+</form></td>
                 </tr>
             @endforeach
         @endif
@@ -36,9 +48,9 @@
         </tbody>
     </table>
 
-{{--    @if(count($users))--}}
+<!-- {{--    @if(count($users))--}}
 {{--        {{$users->links()}}--}}
-{{--        @endif--}}
+{{--        @endif--}} -->
 
     <br>
     <br>

@@ -55,7 +55,22 @@ Route::prefix('admin')->group(function () {
 
     Route::post('/users/register', [HomeController::class, 'register']);
 
+
+    Route::delete('/users/delete/{UserID}',function($UserID){
+        $user=Users::find($UserID);
+        $user->delete();
+        $session::flash('message','رکورد حذف شد ');
+        return redirect('/ulist');
+
 });
+
+Route::put('/users/edit/{UserID}',function($UserID){
+    $user=Users::find($UserID);
+    return view('pages.edit')->with('user',$user);
+
+});
+    });
+
 
 
 

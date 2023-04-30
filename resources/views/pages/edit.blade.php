@@ -1,7 +1,7 @@
 @extends('layouts.master')
 
 @section('title')
-    DivarRegister
+    DivarEdit
     @endsection
 
     @section('content')
@@ -64,9 +64,10 @@
 <main id="main">
     <section id="featured" class="featured">
         <div class="container">
-            <form style="margin-top:100px" method="POST" action="/admin/users/register">
+            <form style="margin-top:100px" method="POST" action="/admin/users/update/{{$user->UserID}}">
 
                 @csrf
+                @method('put')
                 <div class="form-group">
                     <label for="UserName">UserName</label>
                     <input type="text" class="form-control" id="text" name="UserName" value="{{old('UserName')}}">
